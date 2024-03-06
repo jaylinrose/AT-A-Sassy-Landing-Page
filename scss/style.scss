@@ -1,3 +1,9 @@
+//Documentation and Reference in README
+
+/* "Sass extends CSS’s @import rule with the ability to import Sass and CSS stylesheets, providing access to mixins, functions, and variables and combining multiple stylesheets’ CSS together. Unlike plain CSS imports, which require the browser to make multiple HTTP requests as it renders your page, Sass imports are handled entirely during compilation.(At Rules: @import*)."*/
+@import "btnConfig";
+@import "utilities";
+@import "config";
 
 * {
   box-sizing: border-box;
@@ -15,11 +21,75 @@ img {
   border-radius: 50%;
 }
 
-a {
-  text-decoration: none;
-}
+  a {
+    text-decoration: none;
+  }
 
-.hero {
+
+// class selector for entire header section
+  .hero // class selector for entire header section
+  {
+  
+    @include set-bg($primary-color);
+      /* 
+    @include rule deviated from SCSS mixin from _utilities.scss as "Mixins allow you to define styles that can be re-used throughout your stylesheet(At Rules: @mixin and @include*)." $primary-color derived from _config.scss. 
+    */
+    
+    height: 600px; //height of black($-primary-color) background. Would relative unites like em be better for mobile devices or different screen sizes?
+  
+    nav //nav bar, parent of nested children(ul(unordered-list, li(list), and a(anchor tag).)
+    {
+      display: flex; /*flexbox utilization. Allows children(ul and "banner" h1 class to be in line. Possibly defaulted to row because of "hero-banner" content. Centered alignemnt and not extended to end of page due to restriction of container "box" as its width is limited to 1100px in style.css. "The flexible box layout module, usually referred to as flexbox, was designed as a one-dimensional layout model, and as a method that could offer space distribution between items in an interface and powerful alignment capabilities...describ[ed] flexbox as being one-dimensional we are describing the fact that flexbox deals with layout in one dimension at a time — either as a row or as a column."*  */ 
+
+      align-items: center; 
+      justify-content: space-between;
+  
+      ul {
+        display: flex; //needed again as its children, li, would be column displayed
+        list-style-type: none; 
+      }
+  
+      li {
+        padding: 15px;
+      }
+  
+      a {
+        color: text-color-picker($primary-color); //referring to _config.scss
+      }
+  
+      a:hover 
+      {
+        color: $secondary-color; //referring to _config.scss
+      }
+    }
+  
+    &-content /* "&" parent selector, in this case refering back to hero selector, selecting "hero-content" class. "The parent selector, &, is a special selector invented by Sass that’s used in nested selectors to refer to the outer selector. It makes it possible to re-use the outer selector in more complex ways, like adding a pseudo-class or adding a selector before the parent(Style Rules: Parent Selector*)." */
+    {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      margin-top: 30px;
+  
+      img {
+        width: 50%;
+      }
+  
+      h1 {
+        font-size: 50px;
+        line-height: 1.2;
+      }
+    }
+  }
+  
+  
+
+  
+  
+
+  
+  
+  
+  
   // This is where the bulk of the SCSS styling needs to be done
 
   // Take a look at the other files we've built already. How can they be useful here?
@@ -28,7 +98,7 @@ a {
   // 1. $variables
   // 2. nesting (dont forget about the ampersand (&) parent selector!)
   // 3. At-Rules
-}
+
 
 // This code is related to some of the aspects of SCSS we have yet to cover.
 // While you don't have to mess with it, it would be advisable to attempt to understand its functionality.
